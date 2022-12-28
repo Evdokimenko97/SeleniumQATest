@@ -99,4 +99,14 @@ public class BasePage {
             return displayedText;
         }
     }
+
+    public void click(By locator) {
+        WebElement webElement = driver.findElement(locator);
+        scrollingPage(webElement);
+        webElement.click();
+    }
+
+    public void goBack() {
+        driver.navigate().back();
+    }
 }
