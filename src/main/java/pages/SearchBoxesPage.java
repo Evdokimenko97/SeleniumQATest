@@ -20,20 +20,6 @@ public class SearchBoxesPage extends SandboxPage {
         return driver.getTitle();
     }
 
-    public SearchBoxesPage setInputSearchText(String text) {
-        setText(searchBox, text);
-        return this;
-    }
-
-    public String getInputSearchText() {
-        return getText(searchBox);
-    }
-
-    public SearchBoxesPage clickSearchButton() {
-        driver.findElement(buttonSearch).click();
-        return new SearchBoxesPage();
-    }
-
     public boolean search(String text) {
         setText(searchBox, text);
         click(buttonSearch);
