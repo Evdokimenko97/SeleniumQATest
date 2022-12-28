@@ -21,22 +21,4 @@ public class WindowOperationPage extends SandboxPage {
     public void clickNewWindowButton() {
         click(newWindow);
     }
-
-    public void switchToNewWindow() {
-        // Get current window handle
-        String currentWindow = getWindowHandle();
-
-        // Get all window handles
-        Set<String> handles = getWindowHandles();
-
-        // Switch to a new window
-        Iterator<String> iter = handles.iterator();
-        String newWindow = null;
-        while (iter.hasNext()) {
-            newWindow = iter.next();
-            if (!currentWindow.equals(newWindow)) {
-                driver.switchTo().window(newWindow);
-            }
-        }
-    }
 }

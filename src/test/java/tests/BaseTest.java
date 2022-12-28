@@ -29,8 +29,8 @@ public class BaseTest extends BasePage {
         winOper = new WindowOperationPage();
     }
 
-    @AfterSuite
-    public void tearDown() {
-        closeBrowser();
-    }
+//    @AfterSuite
+//    public void tearDown() {
+//        closeBrowser();
+//    }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 
@@ -65,6 +66,9 @@ public class BasePage {
     }
 
     public void closeBrowser() {
+        driver.quit();
+    }
+    public void closeWindow() {
         driver.close();
     }
 
@@ -117,5 +121,39 @@ public class BasePage {
 
     public Set<String> getWindowHandles() {
         return driver.getWindowHandles();
+    }
+
+    public int getNumberOfOpenWindows() {
+        return driver.getWindowHandles().size();
+    }
+
+    public void switchToNewWindow() {
+        // Get current window handle
+        String currentWindow = getWindowHandle();
+
+        // Get all window handles
+        Set<String> handles = getWindowHandles();
+
+        // Switch to a new window
+        Iterator<String> iter = handles.iterator();
+        String newWindow = null;
+        while (iter.hasNext()) {
+            newWindow = iter.next();
+            if (!currentWindow.equals(newWindow)) {
+                driver.switchTo().window(newWindow);
+            }
+        }
+    }
+
+    public void openNewTab() {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+    }
+
+    public void goToUrl(String url) {
+        driver.get(url);
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
     }
 }
