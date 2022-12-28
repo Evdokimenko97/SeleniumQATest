@@ -13,11 +13,11 @@ public class FormFieldsTests extends SandboxTests {
         formFields.clickFormFields();
     }
 
-    @BeforeGroups("FormFields")
-    public void testTitleFormFieldsPage() {
-        String pageTitle = formFields.getTitlePage();
-        assertEquals(pageTitle, "Form Fields | automateNow", "The title in Form Fields didn't match!");
-    }
+//    @BeforeGroups("FormFields")
+//    public void testTitleFormFieldsPage() {
+//        String pageTitle = formFields.getTitlePage();
+//        assertEquals(pageTitle, "Form Fields | automateNow", "The title in Form Fields didn't match!");
+//    }
 
     @Test(groups = "FormFields", description = "Enters text in an input field")
     public void testEnterText() {
@@ -29,21 +29,21 @@ public class FormFieldsTests extends SandboxTests {
 
     @Test(groups = "FormFields", description = "Check a checkbox")
     public void testCheckbox() {
-        formFields.selectCheckbox("1");
-        assertTrue(formFields.checkboxIsSelected("1"), "Checkbox isn't selected!");
-        assertFalse(formFields.checkboxIsSelected("2"), "Checkbox is selected!");
+        formFields.selectCheckbox("Water");
+        assertTrue(formFields.checkboxIsSelected("Water"), "Checkbox isn't selected!");
+        assertFalse(formFields.checkboxIsSelected("Milk"), "Checkbox is selected!");
     }
 
     @Test(groups = "FormFields", description = "Selects from a drop-down")
     public void testSelectDropdown() {
-        String myOption = "Binary";
+        String myOption = "Yes";
         formFields.selectDropdown(myOption);
         assertEquals(formFields.getDropDownText(), myOption, "Dropdown option is not selected!");
     }
 
     @Test(groups = "FormFields", description = "Selects a radio button")
     public void testSelectRadioButton() {
-        String radioBtn1 = "White";
+        String radioBtn1 = "Red";
         String radioBtn2 = "Blue";
 
         formFields.selectRadioButton(radioBtn1);

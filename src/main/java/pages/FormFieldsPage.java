@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class FormFieldsPage extends BasePage {
-    private By inputField = By.cssSelector("input#g1103-inputfield");
-    private By dropDown = By.cssSelector("select#g1103-dropdownmenu");
+    private By inputField = By.cssSelector("input#g1103-name");
+    private By dropDown = By.cssSelector("select#g1103-doyouhaveanysiblings");
     private By buttonFormFields = By.xpath("//a[contains(text(),'Form Fields')]");
 
     public SandboxPage clickFormFields() {
@@ -32,12 +32,12 @@ public class FormFieldsPage extends BasePage {
      * @param option Range is 1 to 3
      */
     public FormFieldsPage selectCheckbox(String option) {
-        driver.findElement(By.cssSelector("input[value='Option " + option + "']")).click();
+        driver.findElement(By.cssSelector("input[value='" + option + "']")).click();
         return this;
     }
 
     public boolean checkboxIsSelected(String option) {
-        return driver.findElement(By.cssSelector("input[value='Option " + option + "']")).isSelected();
+        return driver.findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
     }
 
     /**

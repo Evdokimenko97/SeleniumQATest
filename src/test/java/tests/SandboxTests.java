@@ -13,10 +13,10 @@ public abstract class SandboxTests extends BaseTest {
         navBar.selectSandBox();
     }
 
-    @BeforeGroups("Sandbox")
-    @Test(description = "Verify page title")
-    public void testTitleSandboxPage() {
-        String pageTitle = sandbox.getTitleSandBoxPage();
-        assertEquals(pageTitle, "Automation Testing Practice Website | automateNow |", "The title didn't match!");
-    }
+//    @BeforeGroups("Sandbox")
+//    @Test(description = "Verify page title")
+//    public void testTitleSandboxPage() {
+//        String pageTitle = sandbox.getTitleSandBoxPage();
+//        assertEquals(pageTitle, "Automation Testing Practice Website | automateNow |", "The title didn't match!");
+//    }
 }

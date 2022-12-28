@@ -11,6 +11,7 @@ public class BaseTest extends BasePage {
     protected SandboxPage sandbox;
     protected FormFieldsPage formFields;
     protected TablesPage table;
+    protected CalendarPage calendar;
 
     @BeforeSuite
     public void setUp() {
@@ -21,6 +22,7 @@ public class BaseTest extends BasePage {
         sandbox = new SandboxPage();
         formFields = new FormFieldsPage();
         table = new TablesPage();
+        calendar = new CalendarPage();
     }
 
     @AfterSuite

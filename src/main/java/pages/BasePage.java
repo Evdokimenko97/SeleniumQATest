@@ -21,7 +21,7 @@ public class BasePage {
 
         try {
             properties = new Properties();
-            fis = new FileInputStream("C:\\asvhd\\SeleniumQATest\\src\\main\\java\\config\\config.properties");
+            fis = new FileInputStream("C:\\IdeaProjects\\SeleniumQATest\\src\\main\\java\\config\\config.properties");
             properties.load(fis);
 
             browser = properties.getProperty("browser");
