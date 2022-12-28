@@ -8,17 +8,12 @@ import static org.testng.Assert.*;
 public class SearchBoxesTests extends SandboxTests {
 
     @BeforeClass
-    public void textNavigateToSearchBoxesPage() {
+    public void clickNavigateToSearchBoxesPage() {
         searchBoxes.clickSearchPage();
+        assertEquals(searchBoxes.getTitlePage(), "Search Boxes | automateNow", "The title is not correct!");
     }
 
-    @Test(priority = 1)
-    public void testTitle() {
-        String title = searchBoxes.getTitlePage();
-        assertEquals(title, "Search Boxes | automateNow", "The title is not correct!");
-    }
-
-    @Test(priority = 2)
+    @Test
     public void testSearch() {
         boolean search;
         search = searchBoxes.search("aaa");

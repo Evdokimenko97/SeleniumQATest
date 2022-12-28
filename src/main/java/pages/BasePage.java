@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
 
 public class BasePage {
     protected static WebDriver driver;
@@ -57,7 +58,7 @@ public class BasePage {
         js.executeScript("arguments[0].scrollIntoView();", element);
         js.executeScript("scroll(0, 400)");
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -108,5 +109,13 @@ public class BasePage {
 
     public void goBack() {
         driver.navigate().back();
+    }
+
+    public String getWindowHandle() {
+        return driver.getWindowHandle();
+    }
+
+    public Set<String> getWindowHandles() {
+        return driver.getWindowHandles();
     }
 }

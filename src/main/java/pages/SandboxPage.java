@@ -2,7 +2,7 @@ package pages;
 
 public class SandboxPage extends BasePage {
 
-    public String getTitleSandBoxPage() {
+    public String getPageTitle() {
         return driver.getTitle();
     }
 }

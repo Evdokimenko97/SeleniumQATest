@@ -1,8 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class CalendarPage extends SandboxPage {
     private By buttonCalendars = By.xpath("//a[text()='Calendars']");
@@ -13,15 +11,13 @@ public class CalendarPage extends SandboxPage {
     private By calendarArrowLeft = By.xpath("//a[@title='Previous']");
 
     public CalendarPage clickCalendarPage() {
-        WebElement webElement = driver.findElement(buttonCalendars);
-        scrollingPage(webElement);
-        webElement.click();
+        click(buttonCalendars);
         return new CalendarPage();
     }
 
-//    public String getTitlePage() {
-//        return driver.getTitle();
-//    }
+    public String getCalendarPage() {
+        return driver.getTitle();
+    }
 
     public CalendarPage selectDate(String month, String day, String year) {
         driver.findElement(calendarField).click();

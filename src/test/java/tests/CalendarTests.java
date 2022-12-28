@@ -13,13 +13,8 @@ public class CalendarTests extends SandboxTests {
     @BeforeClass
     public void textNavigateToTablesPage() {
         calendar.clickCalendarPage();
+        assertEquals(calendar.getCalendarPage(), "Calendars | automateNow", "The title in Calendars didn't match!");
     }
-
-//    @BeforeGroups("Calendar")
-//    public void testTitleCalendars() {
-//        String pageTitle = calendar.getTitlePage();
-//        assertEquals(pageTitle, "Calendars | automateNow", "The title in Calendars didn't match!");
-//    }
 
     @Test(groups = "Calendar", description = "Check price by item")
     public void testCalendars() throws InterruptedException {

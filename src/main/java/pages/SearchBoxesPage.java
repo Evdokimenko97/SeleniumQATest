@@ -10,9 +10,7 @@ public class SearchBoxesPage extends SandboxPage {
     private By noSearchResults = By.xpath("//div/h4[text()='Nothing Found']");
 
     public SearchBoxesPage clickSearchPage() {
-        WebElement webElement = driver.findElement(buttonSearchBoxesPage);
-        scrollingPage(webElement);
-        webElement.click();
+        click(buttonSearchBoxesPage);
         return new SearchBoxesPage();
     }
 
