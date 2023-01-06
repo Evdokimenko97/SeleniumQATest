@@ -1,7 +1,9 @@
 package pages;
 
+import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -56,10 +58,19 @@ public class BasePage {
 
     public void scrollingPage(WebElement element) {
         js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", element);
-        js.executeScript("scroll(0, 400)");
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
         try {
-            Thread.sleep(500);
+            int i = 0;
+            while (i < 10) {
+                if (!element.isDisplayed()) {
+                    Thread.sleep(100);
+                } else {
+                    Thread.sleep(50);
+                    element.sendKeys(Keys.DOWN);
+                    break;
+                }
+            }
+            Thread.sleep(2000);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -68,6 +79,7 @@ public class BasePage {
     public void closeBrowser() {
         driver.quit();
     }
+
     public void closeWindow() {
         driver.close();
     }
@@ -85,7 +97,7 @@ public class BasePage {
         }
         return true;
     }
-    
+
     public void setText(By locator, String text) {
         driver.findElement(locator).clear();
         driver.findElement(locator).sendKeys(text);
@@ -155,5 +167,12 @@ public class BasePage {
 
     public String getPageTitle() {
         return driver.getTitle();
+    }
+
+    public void dragAndDropByOffset(By locator, int x, int y) {
+        Actions actions = new Actions(driver);
+        WebElement element = driver.findElement(locator);
+        scrollingPage(element);
+        actions.dragAndDropBy(element, x, y).perform();
     }
 }

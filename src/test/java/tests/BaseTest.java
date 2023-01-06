@@ -14,6 +14,7 @@ public class BaseTest extends BasePage {
     protected CalendarPage calendar;
     protected SearchBoxesPage searchBoxes;
     protected WindowOperationPage winOper;
+    protected GesturesPage gestures;
 
     @BeforeSuite
     public void setUp() {
@@ -27,10 +28,11 @@ public class BaseTest extends BasePage {
         calendar = new CalendarPage();
         searchBoxes = new SearchBoxesPage();
         winOper = new WindowOperationPage();
+        gestures = new GesturesPage();
     }
 
-//    @AfterSuite
-//    public void tearDown() {
-//        closeBrowser();
-//    }
+    @AfterSuite
+    public void tearDown() {
+        closeBrowser();
+    }
 }
