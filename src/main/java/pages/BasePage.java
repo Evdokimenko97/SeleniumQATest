@@ -175,4 +175,16 @@ public class BasePage {
         scrollingPage(element);
         actions.dragAndDropBy(element, x, y).perform();
     }
+
+    public void dismissPopup() {
+        driver.switchTo().alert().dismiss();
+    }
+
+    public void acceptPopup() {
+        driver.switchTo().alert().accept();
+    }
+
+    public void enterTextInPopup(String text) {
+        driver.switchTo().alert().sendKeys(text);
+    }
 }

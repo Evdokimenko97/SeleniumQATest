@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 public class CalendarTests extends SandboxTests {
 
     @BeforeClass
-    public void textNavigateToTablesPage() {
+    public void textNavigateToCalendarsPage() {
         calendar.clickCalendarPage();
         assertEquals(calendar.getCalendarPage(), "Calendars | automateNow", "The title in Calendars didn't match!");
     }
