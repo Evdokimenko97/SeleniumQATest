@@ -21,16 +21,20 @@ public class PopupsTests extends SandboxTests {
         popups.clickConfirmPopup();
         popups.acceptPopup();
         assertEquals(popups.getConfirmPopupSelection(), "OK it is!", "The popup selection result does not match!");
+    }
 
+    @Test(description = "Tests a JS prompt box")
+    public void testPromptPopup() {
         popups.clickPromptPopup();
         String text = "Andrew";
-        popups.enterTextInPopup(text);
+        popups.setAlertText(text);
         popups.acceptPopup();
-        assertEquals(popups.getPromptPopupSelection(), "Nice to meet you, " + text + "!", "The prompt popup selection result does not match!");
+        popups.waitForPromptPopupResult(String.format("Nice to meet you, %s!", text));
 
         popups.clickPromptPopup();
-        popups.enterTextInPopup(text);
+        popups.setAlertText(text);
         popups.dismissPopup();
-        assertEquals(popups.getPromptPopupSelection(), "Fine, be that way...", "The prompt popup selection result does not match!");
+        popups.waitForPromptPopupResult("Fine, be that way...");
+
     }
 }

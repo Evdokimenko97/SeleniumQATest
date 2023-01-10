@@ -35,7 +35,7 @@ public class PopupsPage extends SandboxPage {
         return getText(confirmResult);
     }
 
-    public String getPromptPopupSelection() {
-        return getText(promptResult);
+    public void waitForPromptPopupResult(String expectedText) {
+        waitForElementText(promptResult, expectedText);
     }
 }
