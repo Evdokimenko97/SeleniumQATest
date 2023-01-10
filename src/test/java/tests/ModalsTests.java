@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 public class ModalsTests extends SandboxTests {
 
     @BeforeClass
-    public void textNavigateToPopupsPage() {
+    public void textNavigateToModalsPage() {
         modals.clickModalsPage();
         assertEquals(modals.getModalsPage(), "Modals | automateNow", "The title in Modals didn't match!");
     }

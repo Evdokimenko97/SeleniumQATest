@@ -17,6 +17,7 @@ public class BaseTest extends BasePage {
     protected GesturesPage gestures;
     protected PopupsPage popups;
     protected ModalsPage modals;
+    protected HoverPage hover;
 
     @BeforeSuite
     public void setUp() {
@@ -33,6 +34,7 @@ public class BaseTest extends BasePage {
         gestures = new GesturesPage();
         popups = new PopupsPage();
         modals = new ModalsPage();
+        hover = new HoverPage();
     }
 
     @AfterSuite
