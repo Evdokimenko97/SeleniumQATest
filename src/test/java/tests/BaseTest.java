@@ -16,6 +16,7 @@ public class BaseTest extends BasePage {
     protected WindowOperationPage winOper;
     protected GesturesPage gestures;
     protected PopupsPage popups;
+    protected ModalsPage modals;
 
     @BeforeSuite
     public void setUp() {
@@ -31,6 +32,7 @@ public class BaseTest extends BasePage {
         winOper = new WindowOperationPage();
         gestures = new GesturesPage();
         popups = new PopupsPage();
+        modals = new ModalsPage();
     }
 
     @AfterSuite

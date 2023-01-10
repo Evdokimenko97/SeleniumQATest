@@ -10,7 +10,7 @@ public class PopupsTests extends SandboxTests {
     @BeforeClass
     public void textNavigateToPopupsPage() {
         popups.clickPopupsPage();
-        assertEquals(calendar.getCalendarPage(), "Popups | automateNow", "The title in Popups didn't match!");
+        assertEquals(popups.getPopupsPage(), "Popups | automateNow", "The title in Popups didn't match!");
     }
 
     @Test(description = "Test popup windows")
@@ -35,6 +35,5 @@ public class PopupsTests extends SandboxTests {
         popups.setAlertText(text);
         popups.dismissPopup();
         popups.waitForPromptPopupResult("Fine, be that way...");
-
     }
 }
