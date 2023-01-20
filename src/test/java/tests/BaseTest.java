@@ -18,6 +18,7 @@ public class BaseTest extends BasePage {
     protected PopupsPage popups;
     protected ModalsPage modals;
     protected HoverPage hover;
+    protected BrowserStackPage browserStack;
 
     @BeforeSuite
     public void setUp() {
@@ -35,6 +36,7 @@ public class BaseTest extends BasePage {
         popups = new PopupsPage();
         modals = new ModalsPage();
         hover = new HoverPage();
+        browserStack = new BrowserStackPage();
     }
 
     @AfterSuite
