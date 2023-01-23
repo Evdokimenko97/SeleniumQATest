@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -55,7 +56,14 @@ public class BasePage {
     private void openBrowser() {
         if (browser.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
+
+//            // Run in headless mode
+//            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--headless", "--window-size=1920,1080");
+//            driver = new ChromeDriver(options);
+
             driver = new ChromeDriver();
+
 //            WebDriverManager.chromedriver().driverVersion("88.0.0.1").setup();
         }
 

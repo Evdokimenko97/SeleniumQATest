@@ -19,6 +19,7 @@ public class BaseTest extends BasePage {
     protected ModalsPage modals;
     protected HoverPage hover;
     protected BrowserStackPage browserStack;
+    protected FileUploadPage fileUpload;
 
     @BeforeSuite
     public void setUp() {
@@ -37,6 +38,7 @@ public class BaseTest extends BasePage {
         modals = new ModalsPage();
         hover = new HoverPage();
         browserStack = new BrowserStackPage();
+        fileUpload = new FileUploadPage();
     }
 
     @AfterSuite
