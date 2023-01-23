@@ -1,6 +1,7 @@
 package pages;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -214,5 +216,15 @@ public class BasePage {
         WebElement element = driver.findElement(locator);
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
+    }
+
+    public void takeScreenshot() {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File file = screenshot.getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(file, new File("./screenshot.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
