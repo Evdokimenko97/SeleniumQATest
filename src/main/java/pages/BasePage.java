@@ -1,7 +1,9 @@
 package pages;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -48,8 +50,12 @@ public class BasePage {
 
     private void openBrowser() {
         if (browser.equals("chrome")) {
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
+//            WebDriverManager.chromedriver().driverVersion("88.0.0.1").setup();
         }
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
     }
 
