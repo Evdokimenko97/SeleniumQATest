@@ -20,6 +20,7 @@ public class BaseTest extends BasePage {
     protected HoverPage hover;
     protected BrowserStackPage browserStack;
     protected FileUploadPage fileUpload;
+    protected FileDownloadPage fileDownload;
 
     @BeforeSuite
     public void setUp() {
@@ -39,6 +40,7 @@ public class BaseTest extends BasePage {
         hover = new HoverPage();
         browserStack = new BrowserStackPage();
         fileUpload = new FileUploadPage();
+        fileDownload = new FileDownloadPage();
     }
 
     @AfterSuite

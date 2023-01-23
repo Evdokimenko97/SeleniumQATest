@@ -3,6 +3,7 @@ package pages;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,9 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class BasePage {
     protected static WebDriver driver;
@@ -56,15 +55,20 @@ public class BasePage {
     private void openBrowser() {
         if (browser.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
+//            WebDriverManager.chromedriver().driverVersion("88.0.0.1").setup();
 
 //            // Run in headless mode
 //            ChromeOptions options = new ChromeOptions();
 //            options.addArguments("--headless", "--window-size=1920,1080");
 //            driver = new ChromeDriver(options);
 
-            driver = new ChromeDriver();
+            // Change download default directory
+            ChromeOptions options = new ChromeOptions();
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("download.default_directory", "C:\\Work\\Temp");
+            options.setExperimentalOption("prefs", prefs);
 
-//            WebDriverManager.chromedriver().driverVersion("88.0.0.1").setup();
+            driver = new ChromeDriver(options);
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
