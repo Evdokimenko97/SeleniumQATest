@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
@@ -197,7 +199,14 @@ public class BasePage {
     }
 
     public void waitForElementText(By locator, String text) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+//        wait.until(ExpectedConditions.textToBe(locator, text));
+
+        Wait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(3))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(NoSuchElementException.class);
+
         wait.until(ExpectedConditions.textToBe(locator, text));
     }
 
