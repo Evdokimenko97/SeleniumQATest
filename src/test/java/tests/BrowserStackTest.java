@@ -17,4 +17,12 @@ public class BrowserStackTest extends BaseTest {
 
         takeScreenshot();
     }
+
+    @Test(description = "Takes an element screenshot")
+    public void testElementScreenshot() {
+        driver.get("https://www.browserstack.com/guide/mouse-hover-in-selenium");
+        browserStack.selectIntroToSeleniumWebDriver();
+
+        browserStack.screenshotProductsButton();
+    }
 }

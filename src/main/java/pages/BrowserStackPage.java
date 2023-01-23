@@ -16,4 +16,9 @@ public class BrowserStackPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(liveInProducts));
     }
+
+    public BrowserStackPage screenshotProductsButton() {
+        takeElementScreenshot(products);
+        return this;
+    }
 }

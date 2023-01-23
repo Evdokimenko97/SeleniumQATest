@@ -227,4 +227,15 @@ public class BasePage {
             throw new RuntimeException(e);
         }
     }
+
+
+    public void takeElementScreenshot(By locator) {
+        WebElement element = driver.findElement(locator);
+        File file = element.getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(file, new File("./screenshot.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
