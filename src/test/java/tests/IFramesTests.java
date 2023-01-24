@@ -19,9 +19,9 @@ public class IFramesTests extends SandboxTests {
     public void testIFrames() {
         IFramesPage iframe = new IFramesPage();
         iframe.openIframe();
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title='W3Schools HTML Tutorial']")));
+        driver.switchTo().frame(iframe.frameTutorial());
         iframe.clickJS();
         iframe.switchToDefaultFrame();
-        iframe.clickCSS();
+        assertEquals(iframe.getPageTitle(), "HTML Iframes", "The title in page didn't match!");
     }
 }
