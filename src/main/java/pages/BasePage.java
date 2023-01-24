@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -57,6 +59,8 @@ public class BasePage {
             WebDriverManager.chromedriver().setup();
 //            WebDriverManager.chromedriver().driverVersion("88.0.0.1").setup();
 
+//            WebDriverManager.firefoxdriver().setup();
+
 //            // Run in headless mode
 //            ChromeOptions options = new ChromeOptions();
 //            options.addArguments("--headless", "--window-size=1920,1080");
@@ -68,14 +72,18 @@ public class BasePage {
 //            prefs.put("download.default_directory", "C:\\Work\\Temp");
 //            options.setExperimentalOption("prefs", prefs);
 
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
+
             // Disable message 'Chrome is being controlled by automated test software'
             ChromeOptions options = new ChromeOptions();
 //            options.addArguments("disable-infobars");
             options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
+
             driver = new ChromeDriver(options);
         }
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
@@ -253,5 +261,14 @@ public class BasePage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void switchFrames(WebElement frame) {
+        driver.switchTo().frame(frame);
+        System.out.println(driver.getTitle());
+    }
+
+    public void switchToDefaultFrame() {
+        driver.switchTo().defaultContent();
     }
 }
