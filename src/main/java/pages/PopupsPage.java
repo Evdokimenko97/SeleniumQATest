@@ -11,7 +11,7 @@ public class PopupsPage extends SandboxPage {
     private By promptResult = By.xpath("//p[@id='promptResult']");
 
     public PopupsPage clickPopupsPage() {
-        click(buttonPopups);
+        clickWithScroll(buttonPopups);
         return new PopupsPage();
     }
 
@@ -20,15 +20,15 @@ public class PopupsPage extends SandboxPage {
     }
 
     public void clickAlertPopup() {
-        click(buttonAlert);
+        clickWithScroll(buttonAlert);
     }
 
     public void clickConfirmPopup() {
-        click(buttonConfirm);
+        clickWithScroll(buttonConfirm);
     }
 
     public void clickPromptPopup() {
-        click(buttonPrompt);
+        clickWithScroll(buttonPrompt);
     }
 
     public String getConfirmPopupSelection() {

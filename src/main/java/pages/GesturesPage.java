@@ -7,7 +7,7 @@ public class GesturesPage extends SandboxPage {
     private By mapbox = By.xpath("//canvas[@class='mapboxgl-canvas']");
 
     public GesturesPage clickGesturesPage() {
-        click(buttonGestures);
+        clickWithScroll(buttonGestures);
         return new GesturesPage();
     }
 

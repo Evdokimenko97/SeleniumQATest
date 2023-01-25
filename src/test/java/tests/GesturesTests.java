@@ -15,8 +15,8 @@ public class GesturesTests extends SandboxTests {
 
     @Test
     public void testClickAndDrag() {
-        int x_coordinate = 300;
-        int y_coordinate = 300;
+        int x_coordinate = -300;
+        int y_coordinate = -300;
 
         gestures.dragMap(x_coordinate, y_coordinate);
     }

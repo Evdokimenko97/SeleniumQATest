@@ -9,7 +9,7 @@ public class FileUploadPage extends BasePage {
     private By uploadStatus = By.xpath("//div[@class='wpcf7-response-output']");
 
     public FileUploadPage clickFileUploadPage() {
-        click(buttonFileUpload);
+        clickWithScroll(buttonFileUpload);
         return new FileUploadPage();
     }
 
@@ -19,7 +19,7 @@ public class FileUploadPage extends BasePage {
 
     public FileUploadPage uploadFile(String filePath) {
         driver.findElement(chooseFileBtn).sendKeys(filePath);
-        click(uploadBtn);
+        clickWithScroll(uploadBtn);
         waitForElementText(uploadStatus, "File upload complete");
         return this;
     }

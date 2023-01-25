@@ -2,8 +2,10 @@ package tests;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.TablesPage;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class TablesTests extends SandboxTests {
 
@@ -20,5 +22,14 @@ public class TablesTests extends SandboxTests {
 
         String orangePrice = table.getItemPrice("Oranges");
         assertEquals(orangePrice, "$3.99", "The price on the orange is not correct!");
+    }
+
+    @Test(description = "Tests table pagination")
+    public void testTablePagination() {
+        TablesPage tablesPage = new TablesPage();
+        tablesPage.sortByCountry();
+        String populationUK = tablesPage.getPopulation("United Kingdom");
+        assertNotEquals(populationUK, "-1", "The country was not found on the list!");
+        System.out.println("The population in the United Kingdom is " + populationUK + " million.");
     }
 }

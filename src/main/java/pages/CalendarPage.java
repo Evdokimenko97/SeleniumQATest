@@ -11,7 +11,7 @@ public class CalendarPage extends SandboxPage {
     private By calendarArrowLeft = By.xpath("//a[@title='Previous']");
 
     public CalendarPage clickCalendarPage() {
-        click(buttonCalendars);
+        clickWithScroll(buttonCalendars);
         return new CalendarPage();
     }
 

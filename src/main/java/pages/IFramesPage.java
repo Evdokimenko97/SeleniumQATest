@@ -9,7 +9,7 @@ public class IFramesPage extends BasePage {
     private By iframeTutorial = By.xpath("//iframe[@title='W3Schools HTML Tutorial']");
 
     public IFramesPage clickIFramesPage() {
-        click(buttonIFrames);
+        clickWithScroll(buttonIFrames);
         return new IFramesPage();
     }
 

@@ -7,7 +7,7 @@ public class FileDownloadPage extends BasePage {
     private By pdfDownloadBtn = By.xpath("//a[@class='wpdm-download-link download-on-click btn btn-primary ']");
 
     public FileDownloadPage clickFileDownloadPage() {
-        click(buttonFileDownload);
+        clickWithScroll(buttonFileDownload);
         return new FileDownloadPage();
     }
 
@@ -16,7 +16,7 @@ public class FileDownloadPage extends BasePage {
     }
 
     public FileDownloadPage downloadPage() {
-        click(pdfDownloadBtn);
+        clickWithScroll(pdfDownloadBtn);
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {

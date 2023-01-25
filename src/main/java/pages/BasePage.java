@@ -6,14 +6,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -95,18 +93,9 @@ public class BasePage {
     public void scrollingPage(WebElement element) {
         js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
+
         try {
-            int i = 0;
-            while (i < 10) {
-                if (!element.isDisplayed()) {
-                    Thread.sleep(100);
-                } else {
-                    Thread.sleep(50);
-                    element.sendKeys(Keys.DOWN);
-                    break;
-                }
-            }
-            Thread.sleep(2000);
+            Thread.sleep(200);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -153,9 +142,14 @@ public class BasePage {
         }
     }
 
-    public void click(By locator) {
+    public void clickWithScroll(By locator) {
         WebElement webElement = driver.findElement(locator);
         scrollingPage(webElement);
+        webElement.click();
+    }
+
+    public void click(By locator) {
+        WebElement webElement = driver.findElement(locator);
         webElement.click();
     }
 

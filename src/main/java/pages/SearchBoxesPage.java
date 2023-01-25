@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class SearchBoxesPage extends SandboxPage {
     private By buttonSearchBoxesPage = By.xpath("//a[contains(text(),'Search Boxes')]");
@@ -10,7 +9,7 @@ public class SearchBoxesPage extends SandboxPage {
     private By noSearchResults = By.xpath("//div/h4[text()='Nothing Found']");
 
     public SearchBoxesPage clickSearchPage() {
-        click(buttonSearchBoxesPage);
+        clickWithScroll(buttonSearchBoxesPage);
         return new SearchBoxesPage();
     }
 
@@ -20,7 +19,7 @@ public class SearchBoxesPage extends SandboxPage {
 
     public boolean search(String text) {
         setText(searchBox, text);
-        click(buttonSearch);
+        clickWithScroll(buttonSearch);
 
         if(driver.findElements(noSearchResults).size() > 0) {
             goBack();

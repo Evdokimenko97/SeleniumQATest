@@ -7,7 +7,7 @@ public class HoverPage extends SandboxPage {
     private By hover = By.xpath("//h3[@id='mouse_over']");
 
     public HoverPage clickHoverPage() {
-        click(buttonHover);
+        clickWithScroll(buttonHover);
         return new HoverPage();
     }
 

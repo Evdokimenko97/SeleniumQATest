@@ -11,7 +11,7 @@ public class ModalsPage extends SandboxPage {
     private By submitFormModal = By.xpath("//button[@class='pushbutton-wide']");
 
     public ModalsPage clickModalsPage() {
-        click(buttonModals);
+        clickWithScroll(buttonModals);
         return new ModalsPage();
     }
 
@@ -20,14 +20,14 @@ public class ModalsPage extends SandboxPage {
     }
 
     public void clickFormModal() {
-        click(formModal);
+        clickWithScroll(formModal);
     }
 
     public ModalsPage modalSendMessage(String name, String email, String message) {
         setText(nameFormModal, name);
         setText(emailFormModal, email);
         setText(messageFormModal, message);
-        click(submitFormModal);
+        clickWithScroll(submitFormModal);
         return this;
     }
 }
