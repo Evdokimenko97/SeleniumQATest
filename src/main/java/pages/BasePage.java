@@ -2,6 +2,8 @@ package pages;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,6 +24,7 @@ import java.util.*;
 
 public class BasePage {
     protected static WebDriver driver;
+    protected static Logger log = LogManager.getLogger();
 
     public String browser;
     public String baseUrl;
@@ -83,6 +86,7 @@ public class BasePage {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        log.info("Browser is open");
     }
 
     private BasePage closeCookie() {
@@ -91,6 +95,7 @@ public class BasePage {
     }
 
     public void scrollingPage(WebElement element) {
+        log.info("Scrolling the page");
         js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
 
@@ -106,6 +111,7 @@ public class BasePage {
     }
 
     public void closeWindow() {
+        log.info("Close a window");
         driver.close();
     }
 
@@ -116,7 +122,7 @@ public class BasePage {
             driver.get(baseUrl);
             closeCookie();
         } catch (Exception ex) {
-            System.out.println("Unable to navigate to the homepage");
+            log.error("Unable to navigate to the homepage");
             ex.printStackTrace();
             return false;
         }
@@ -124,16 +130,19 @@ public class BasePage {
     }
 
     public void setText(By locator, String text) {
+        log.info("Set the text '" + text +"'");
         driver.findElement(locator).clear();
         driver.findElement(locator).sendKeys(text);
         tab(locator);
     }
 
     public void tab(By locator) {
+        log.info("Key the TAB");
         driver.findElement(locator).sendKeys(Keys.TAB);
     }
 
     public String getText(By locator) {
+        log.info("Get text from field");
         String displayedText = driver.findElement(locator).getText();
         if (displayedText.isEmpty()) {
             return driver.findElement(locator).getAttribute("value");
@@ -143,17 +152,20 @@ public class BasePage {
     }
 
     public void clickWithScroll(By locator) {
+        log.info("Click without scrolling");
         WebElement webElement = driver.findElement(locator);
         scrollingPage(webElement);
         webElement.click();
     }
 
     public void click(By locator) {
+        log.info("Click a element");
         WebElement webElement = driver.findElement(locator);
         webElement.click();
     }
 
     public void goBack() {
+        log.info("Click the back arrow");
         driver.navigate().back();
     }
 
@@ -264,5 +276,14 @@ public class BasePage {
 
     public void switchToDefaultFrame() {
         driver.switchTo().defaultContent();
+    }
+
+    public void setCookie(String name, String value) {
+        Cookie cookie = new Cookie(name, value);
+        driver.manage().addCookie(cookie);
+    }
+
+    public Cookie getCookie(String name) {
+        return driver.manage().getCookieNamed(name);
     }
 }

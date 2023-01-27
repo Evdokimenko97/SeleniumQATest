@@ -1,11 +1,13 @@
 package tests;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.TestListener;
 
 import static org.testng.Assert.*;
 
+@Listeners(TestListener.class)
 public class FormFieldsTests extends SandboxTests {
 
     @BeforeClass
@@ -42,7 +44,7 @@ public class FormFieldsTests extends SandboxTests {
         String radioBtn2 = "Blue";
 
         formFields.selectRadioButton(radioBtn1);
-        assertTrue(formFields.radioButtonIsSelected(radioBtn1), "White radio button is not selected!");
+        assertTrue(formFields.radioButtonIsSelected(radioBtn1 + "1"), "White radio button is not selected!");
 
         formFields.selectRadioButton(radioBtn2);
         assertTrue(formFields.radioButtonIsSelected(radioBtn2), "Blue radio button is not selected!");
