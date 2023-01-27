@@ -22,6 +22,7 @@ public class BaseTest extends BasePage {
     protected FileUploadPage fileUpload;
     protected FileDownloadPage fileDownload;
     protected IFramesPage iframe;
+    protected SliderPage slider;
 
     @BeforeSuite
     public void setUp() {
@@ -43,6 +44,7 @@ public class BaseTest extends BasePage {
         fileUpload = new FileUploadPage();
         fileDownload = new FileDownloadPage();
         iframe = new IFramesPage();
+        slider = new SliderPage();
     }
 
     @AfterSuite
