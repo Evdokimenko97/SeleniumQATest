@@ -20,6 +20,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class BasePage {
@@ -249,10 +251,16 @@ public class BasePage {
     }
 
     public void takeScreenshot() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH-mm-ss-SSS");
+        LocalDateTime dateTime = LocalDateTime.now();
+        takeScreenshot(dateTime.format(dateTimeFormatter));
+    }
+
+    public void takeScreenshot(String screenshotName) {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(file, new File("./screenshot.png"));
+            FileUtils.copyFile(file, new File("./failed_tests/" + screenshotName + ".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

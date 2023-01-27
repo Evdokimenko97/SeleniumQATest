@@ -3,7 +3,10 @@ package tests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.DataUtil;
 import utils.TestListener;
+
+import java.util.HashMap;
 
 import static org.testng.Assert.*;
 
@@ -44,10 +47,23 @@ public class FormFieldsTests extends SandboxTests {
         String radioBtn2 = "Blue";
 
         formFields.selectRadioButton(radioBtn1);
-        assertTrue(formFields.radioButtonIsSelected(radioBtn1 + "1"), "White radio button is not selected!");
+        assertTrue(formFields.radioButtonIsSelected(radioBtn1), "White radio button is not selected!");
 
         formFields.selectRadioButton(radioBtn2);
         assertTrue(formFields.radioButtonIsSelected(radioBtn2), "Blue radio button is not selected!");
         assertFalse(formFields.radioButtonIsSelected(radioBtn1), "White radio button is selected!");
+    }
+
+    @Test(description = "Submits a form", dataProviderClass = DataUtil.class, dataProvider = "dataProvider1")
+    public void testSubmitForm(HashMap<String, String> hashMap) {
+        formFields.setInputFieldText(hashMap.get("Input Field"))
+                .selectCheckbox(hashMap.get("Checkbox"))
+                .selectRadioButton(hashMap.get("Radio Button"))
+                .setEmail(hashMap.get("Email"))
+                .setMessage(hashMap.get("Message"))
+                .clickSubmit();
+
+        String confirmationMsg = formFields.getConfirmationMessage();
+        assertTrue(confirmationMsg.contains("Your message has been sent"), "Form not submitted successfully");
     }
 }

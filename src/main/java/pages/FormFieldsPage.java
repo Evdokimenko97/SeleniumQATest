@@ -8,6 +8,10 @@ public class FormFieldsPage extends BasePage {
     private By inputField = By.cssSelector("input#g1103-name");
     private By dropDown = By.cssSelector("select#g1103-doyouhaveanysiblings");
     private By buttonFormFields = By.xpath("//a[contains(text(),'Form Fields')]");
+    private By emailField = By.xpath("//input[@id='email']");
+    private By messageField = By.xpath("//textarea[@name='message']");
+    private By submitBtn = By.xpath("//button[@class='pushbutton-wide']");
+    private By sentMessage = By.xpath("//h4[@id='contact-form-success-header']");
 
     public SandboxPage clickFormFields() {
         driver.findElement(buttonFormFields).click();
@@ -74,5 +78,24 @@ public class FormFieldsPage extends BasePage {
      */
     public boolean radioButtonIsSelected(String option) {
         return driver.findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
+    }
+
+    public FormFieldsPage setEmail(String text) {
+        setText(emailField, text);
+        return this;
+    }
+
+    public FormFieldsPage setMessage(String text) {
+        setText(messageField, text);
+        return this;
+    }
+
+    public FormFieldsPage clickSubmit() {
+        driver.findElement(submitBtn).submit();
+        return new FormFieldsPage();
+    }
+
+    public String getConfirmationMessage() {
+        return driver.findElement(sentMessage).getText();
     }
 }
