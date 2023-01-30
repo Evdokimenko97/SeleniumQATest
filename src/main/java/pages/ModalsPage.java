@@ -16,7 +16,7 @@ public class ModalsPage extends SandboxPage {
     }
 
     public String getModalsPage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public void clickFormModal() {

@@ -16,11 +16,11 @@ public class CalendarPage extends SandboxPage {
     }
 
     public String getCalendarPage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public CalendarPage selectDate(String month, String day, String year) {
-        driver.findElement(calendarField).click();
+        getDriver().findElement(calendarField).click();
 
         while (true) {
             String currentMonth = getText(calendarMonth);
@@ -29,13 +29,13 @@ public class CalendarPage extends SandboxPage {
                 break;
             }
             if (!currentMonth.equals("January") || Integer.parseInt(year) <= Integer.parseInt(currentYear)) {
-                driver.findElement(calendarArrowLeft).click();
+                getDriver().findElement(calendarArrowLeft).click();
             } else {
-                driver.findElement(calendarArrowRight).click();
+                getDriver().findElement(calendarArrowRight).click();
             }
         }
 
-        driver.findElement(By.xpath("//table//td/a[text()='" + day + "']")).click();
+        getDriver().findElement(By.xpath("//table//td/a[text()='" + day + "']")).click();
         return this;
     }
 

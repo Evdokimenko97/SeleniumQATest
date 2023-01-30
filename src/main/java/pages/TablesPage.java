@@ -12,16 +12,16 @@ public class TablesPage extends SandboxPage {
     private By nextBtnDisable = By.xpath("//a[@class='paginate_button next disabled']");
 
     public TablesPage clickTables() {
-        driver.findElement(buttonTables).click();
+        getDriver().findElement(buttonTables).click();
         return new TablesPage();
     }
 
     public String getTitlePage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public String getItemPrice(String item) {
-        return driver.findElement(By.xpath("//td[text()='" + item + "']/following-sibling::td")).getText();
+        return getDriver().findElement(By.xpath("//td[text()='" + item + "']/following-sibling::td")).getText();
     }
 
     public void sortByCountry() {
@@ -32,8 +32,8 @@ public class TablesPage extends SandboxPage {
         boolean foundCountry = false;
 
         while (!foundCountry) {
-            List<WebElement> countryListOnCurrentPage = driver.findElements(By.xpath("//table[@id='tablepress-1']//td[normalize-space()='" + country + "']"));
-            List<WebElement> disableNextBtn = driver.findElements(nextBtnDisable);
+            List<WebElement> countryListOnCurrentPage = getDriver().findElements(By.xpath("//table[@id='tablepress-1']//td[normalize-space()='" + country + "']"));
+            List<WebElement> disableNextBtn = getDriver().findElements(nextBtnDisable);
 
             if (countryListOnCurrentPage.size() > 0) {
                 foundCountry = true;

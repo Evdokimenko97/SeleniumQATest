@@ -16,7 +16,7 @@ public class PopupsPage extends SandboxPage {
     }
 
     public String getPopupsPage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public void clickAlertPopup() {

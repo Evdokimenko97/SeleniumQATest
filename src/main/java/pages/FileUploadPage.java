@@ -14,11 +14,11 @@ public class FileUploadPage extends BasePage {
     }
 
     public String getFileUploadPage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public FileUploadPage uploadFile(String filePath) {
-        driver.findElement(chooseFileBtn).sendKeys(filePath);
+        getDriver().findElement(chooseFileBtn).sendKeys(filePath);
         clickWithScroll(uploadBtn);
         waitForElementText(uploadStatus, "File upload complete");
         return this;

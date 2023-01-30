@@ -14,14 +14,14 @@ public class SearchBoxesPage extends SandboxPage {
     }
 
     public String getTitlePage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public boolean search(String text) {
         setText(searchBox, text);
         clickWithScroll(buttonSearch);
 
-        if(driver.findElements(noSearchResults).size() > 0) {
+        if(getDriver().findElements(noSearchResults).size() > 0) {
             goBack();
             return false;
         }

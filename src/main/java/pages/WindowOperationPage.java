@@ -12,7 +12,7 @@ public class WindowOperationPage extends SandboxPage {
     }
 
     public String getTitlePage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public void clickNewWindowButton() {

@@ -18,15 +18,15 @@ public class IFramesPage extends BasePage {
 //    }
 
     public void openIframe() {
-        driver.get("https://www.w3schools.com/html/html_iframe.asp");
+        getDriver().get("https://www.w3schools.com/html/html_iframe.asp");
     }
 
     public IFramesPage clickJS() {
-        driver.findElement(JS).click();
+        getDriver().findElement(JS).click();
         return this;
     }
 
     public WebElement frameTutorial() {
-        return driver.findElement(iframeTutorial);
+        return getDriver().findElement(iframeTutorial);
     }
 }

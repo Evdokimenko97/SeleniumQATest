@@ -7,10 +7,10 @@ public class HomePage extends BasePage {
     public static final By firstVideo = By.xpath("//h2/a[@rel='bookmark']");
 
     public String getTitleHomePage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public String nameFirstVideo() {
-        return driver.findElement(firstVideo).getText();
+        return getDriver().findElement(firstVideo).getText();
     }
 }

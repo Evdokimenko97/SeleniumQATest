@@ -14,11 +14,11 @@ public class SliderPage extends SandboxPage {
     }
 
     public String getSliderPage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public void clickSlider(int x, int y) {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(formSlider), x, y).click().build().perform();
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(getDriver().findElement(formSlider), x, y).click().build().perform();
      }
 }

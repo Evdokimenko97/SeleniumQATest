@@ -14,12 +14,12 @@ public class FormFieldsPage extends BasePage {
     private By sentMessage = By.xpath("//h4[@id='contact-form-success-header']");
 
     public SandboxPage clickFormFields() {
-        driver.findElement(buttonFormFields).click();
+        getDriver().findElement(buttonFormFields).click();
         return new SandboxPage();
     }
 
     public String getTitlePage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public FormFieldsPage setInputFieldText(String text) {
@@ -36,19 +36,19 @@ public class FormFieldsPage extends BasePage {
      * @param option Range is 1 to 3
      */
     public FormFieldsPage selectCheckbox(String option) {
-        driver.findElement(By.cssSelector("input[value='" + option + "']")).click();
+        getDriver().findElement(By.cssSelector("input[value='" + option + "']")).click();
         return this;
     }
 
     public boolean checkboxIsSelected(String option) {
-        return driver.findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
+        return getDriver().findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
     }
 
     /**
      * @param option Displayed text
      */
     public FormFieldsPage selectDropdown(String option) {
-        Select dDown = new Select(driver.findElement(dropDown));
+        Select dDown = new Select(getDriver().findElement(dropDown));
         dDown.selectByVisibleText(option);
         return this;
     }
@@ -57,7 +57,7 @@ public class FormFieldsPage extends BasePage {
      * @return The option that is currently selected
      */
     public String getDropDownText() {
-        Select dDown = new Select(driver.findElement(dropDown));
+        Select dDown = new Select(getDriver().findElement(dropDown));
         return dDown.getFirstSelectedOption().getText();
     }
 
@@ -66,7 +66,7 @@ public class FormFieldsPage extends BasePage {
      * @param option Case sensitive value
      */
     public FormFieldsPage selectRadioButton(String option) {
-        WebElement radioButton = driver.findElement(By.cssSelector("input[value='" + option + "']"));
+        WebElement radioButton = getDriver().findElement(By.cssSelector("input[value='" + option + "']"));
         scrollingPage(radioButton);
         radioButton.click();
         return this;
@@ -77,7 +77,7 @@ public class FormFieldsPage extends BasePage {
      * @return Check that radio button is selected
      */
     public boolean radioButtonIsSelected(String option) {
-        return driver.findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
+        return getDriver().findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
     }
 
     public FormFieldsPage setEmail(String text) {
@@ -91,11 +91,11 @@ public class FormFieldsPage extends BasePage {
     }
 
     public FormFieldsPage clickSubmit() {
-        driver.findElement(submitBtn).submit();
+        getDriver().findElement(submitBtn).submit();
         return new FormFieldsPage();
     }
 
     public String getConfirmationMessage() {
-        return driver.findElement(sentMessage).getText();
+        return getDriver().findElement(sentMessage).getText();
     }
 }

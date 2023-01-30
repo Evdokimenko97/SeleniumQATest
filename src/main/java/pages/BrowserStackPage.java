@@ -13,7 +13,7 @@ public class BrowserStackPage extends BasePage {
 
     public void selectIntroToSeleniumWebDriver() {
         hoverOverElement(products);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(liveInProducts));
     }
 

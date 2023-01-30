@@ -12,7 +12,7 @@ public class HoverPage extends SandboxPage {
     }
 
     public String getHoverPage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public HoverPage doHover() {

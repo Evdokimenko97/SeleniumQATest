@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ThreadGuard;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -25,7 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class BasePage {
-    protected static WebDriver driver;
+    protected static final ThreadLocal <WebDriver> driver = new ThreadLocal<>();
     protected static Logger log = LogManager.getLogger();
 
     public String browser;
@@ -33,7 +34,7 @@ public class BasePage {
     public Properties properties;
     public JavascriptExecutor js;
 
-    public void loadProperties() {
+    public synchronized void loadProperties() {
         FileInputStream fis = null;
 
         try {
@@ -55,6 +56,10 @@ public class BasePage {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public static WebDriver getDriver() {
+        return driver.get();
     }
 
     private void openBrowser() {
@@ -83,16 +88,16 @@ public class BasePage {
 //            options.addArguments("disable-infobars");
             options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
 
-            driver = new ChromeDriver(options);
+            driver.set(ThreadGuard.protect(new ChromeDriver()));
         }
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().window().maximize();
         log.info("Browser is open");
     }
 
     private BasePage closeCookie() {
-        driver.findElement(By.cssSelector("a#cookie_action_close_header")).click();
+        getDriver().findElement(By.cssSelector("a#cookie_action_close_header")).click();
         return this;
     }
 
@@ -109,19 +114,20 @@ public class BasePage {
     }
 
     public void closeBrowser() {
-        driver.quit();
+        getDriver().quit();
+        driver.remove();
     }
 
     public void closeWindow() {
         log.info("Close a window");
-        driver.close();
+        getDriver().close();
     }
 
     public Boolean goToHomePage() {
         try {
             loadProperties();
             openBrowser();
-            driver.get(baseUrl);
+            getDriver().get(baseUrl);
             closeCookie();
         } catch (Exception ex) {
             log.error("Unable to navigate to the homepage");
@@ -133,21 +139,21 @@ public class BasePage {
 
     public void setText(By locator, String text) {
         log.info("Set the text '" + text +"'");
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        getDriver().findElement(locator).clear();
+        getDriver().findElement(locator).sendKeys(text);
         tab(locator);
     }
 
     public void tab(By locator) {
         log.info("Key the TAB");
-        driver.findElement(locator).sendKeys(Keys.TAB);
+        getDriver().findElement(locator).sendKeys(Keys.TAB);
     }
 
     public String getText(By locator) {
         log.info("Get text from field");
-        String displayedText = driver.findElement(locator).getText();
+        String displayedText = getDriver().findElement(locator).getText();
         if (displayedText.isEmpty()) {
-            return driver.findElement(locator).getAttribute("value");
+            return getDriver().findElement(locator).getAttribute("value");
         } else {
             return displayedText;
         }
@@ -155,32 +161,32 @@ public class BasePage {
 
     public void clickWithScroll(By locator) {
         log.info("Click without scrolling");
-        WebElement webElement = driver.findElement(locator);
+        WebElement webElement = getDriver().findElement(locator);
         scrollingPage(webElement);
         webElement.click();
     }
 
     public void click(By locator) {
         log.info("Click a element");
-        WebElement webElement = driver.findElement(locator);
+        WebElement webElement = getDriver().findElement(locator);
         webElement.click();
     }
 
     public void goBack() {
         log.info("Click the back arrow");
-        driver.navigate().back();
+        getDriver().navigate().back();
     }
 
     public String getWindowHandle() {
-        return driver.getWindowHandle();
+        return getDriver().getWindowHandle();
     }
 
     public Set<String> getWindowHandles() {
-        return driver.getWindowHandles();
+        return getDriver().getWindowHandles();
     }
 
     public int getNumberOfOpenWindows() {
-        return driver.getWindowHandles().size();
+        return getDriver().getWindowHandles().size();
     }
 
     public void switchToNewWindow() {
@@ -196,47 +202,47 @@ public class BasePage {
         while (iter.hasNext()) {
             newWindow = iter.next();
             if (!currentWindow.equals(newWindow)) {
-                driver.switchTo().window(newWindow);
+                getDriver().switchTo().window(newWindow);
             }
         }
     }
 
     public void openNewTab() {
-        ((JavascriptExecutor) driver).executeScript("window.open()");
+        ((JavascriptExecutor) getDriver()).executeScript("window.open()");
     }
 
     public void goToUrl(String url) {
-        driver.get(url);
+        getDriver().get(url);
     }
 
     public String getPageTitle() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public void dragAndDropByOffset(By locator, int x, int y) {
-        Actions actions = new Actions(driver);
-        WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(getDriver());
+        WebElement element = getDriver().findElement(locator);
         scrollingPage(element);
         actions.dragAndDropBy(element, x, y).perform();
     }
 
     public void dismissPopup() {
-        driver.switchTo().alert().dismiss();
+        getDriver().switchTo().alert().dismiss();
     }
 
     public void acceptPopup() {
-        driver.switchTo().alert().accept();
+        getDriver().switchTo().alert().accept();
     }
 
     public void setAlertText(String text) {
-        driver.switchTo().alert().sendKeys(text);
+        getDriver().switchTo().alert().sendKeys(text);
     }
 
     public void waitForElementText(By locator, String text) {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 //        wait.until(ExpectedConditions.textToBe(locator, text));
 
-        Wait<WebDriver> wait = new FluentWait<>(driver)
+        Wait<WebDriver> wait = new FluentWait<>(getDriver())
                 .withTimeout(Duration.ofSeconds(3))
                 .pollingEvery(Duration.ofSeconds(1))
                 .ignoring(NoSuchElementException.class);
@@ -245,8 +251,8 @@ public class BasePage {
     }
 
     public void hoverOverElement(By locator) {
-        WebElement element = driver.findElement(locator);
-        Actions actions = new Actions(driver);
+        WebElement element = getDriver().findElement(locator);
+        Actions actions = new Actions(getDriver());
         actions.moveToElement(element).perform();
     }
 
@@ -257,7 +263,7 @@ public class BasePage {
     }
 
     public void takeScreenshot(String screenshotName) {
-        TakesScreenshot screenshot = (TakesScreenshot) driver;
+        TakesScreenshot screenshot = (TakesScreenshot) getDriver();
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(file, new File("./failed_tests/" + screenshotName + ".png"));
@@ -268,7 +274,7 @@ public class BasePage {
 
 
     public void takeElementScreenshot(By locator) {
-        WebElement element = driver.findElement(locator);
+        WebElement element = getDriver().findElement(locator);
         File file = element.getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(file, new File("./screenshot.png"));
@@ -278,20 +284,20 @@ public class BasePage {
     }
 
     public void switchFrames(WebElement frame) {
-        driver.switchTo().frame(frame);
-        System.out.println(driver.getTitle());
+        getDriver().switchTo().frame(frame);
+        System.out.println(getDriver().getTitle());
     }
 
     public void switchToDefaultFrame() {
-        driver.switchTo().defaultContent();
+        getDriver().switchTo().defaultContent();
     }
 
     public void setCookie(String name, String value) {
         Cookie cookie = new Cookie(name, value);
-        driver.manage().addCookie(cookie);
+        getDriver().manage().addCookie(cookie);
     }
 
     public Cookie getCookie(String name) {
-        return driver.manage().getCookieNamed(name);
+        return getDriver().manage().getCookieNamed(name);
     }
 }

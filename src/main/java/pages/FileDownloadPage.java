@@ -12,7 +12,7 @@ public class FileDownloadPage extends BasePage {
     }
 
     public String getFileDownloadPage() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public FileDownloadPage downloadPage() {
