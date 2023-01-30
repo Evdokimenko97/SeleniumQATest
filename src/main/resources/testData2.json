@@ -1,0 +1,18 @@
+{
+  "form info": [
+    {
+      "Input Field": "Hello",
+      "Checkbox": "Coffee",
+      "Radio Button": "Red",
+      "Email": "info@automatenow.io",
+      "Message": "This is a test."
+    },
+    {
+      "Input Field": "Hello again",
+      "Checkbox": "Wine",
+      "Radio Button": "Green",
+      "Email": "info@automatenow.io",
+      "Message": "This is a test again."
+    }
+  ]
+}

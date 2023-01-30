@@ -54,7 +54,7 @@ public class FormFieldsTests extends SandboxTests {
         assertFalse(formFields.radioButtonIsSelected(radioBtn1), "White radio button is selected!");
     }
 
-    @Test(description = "Submits a form", dataProviderClass = DataUtil.class, dataProvider = "dataProvider1")
+    @Test(description = "Submit a form", dataProviderClass = DataUtil.class, dataProvider = "dataProvider1")
     public void testSubmitForm(HashMap<String, String> hashMap) {
         formFields.setInputFieldText(hashMap.get("Input Field"))
                 .selectCheckbox(hashMap.get("Checkbox"))
@@ -64,6 +64,34 @@ public class FormFieldsTests extends SandboxTests {
                 .clickSubmit();
 
         String confirmationMsg = formFields.getConfirmationMessage();
+        assertTrue(confirmationMsg.contains("Your message has been sent"), "Form not submitted successfully");
+    }
+
+    @Test(description = "Submit a form", dataProviderClass = DataUtil.class, dataProvider = "dataProvider2")
+    public void testSubmitForm2(String data) {
+        String[] formInfo = data.split(",");
+        formFields.setInputFieldText(formInfo[0])
+                .selectCheckbox(formInfo[1])
+                .selectRadioButton(formInfo[2])
+                .setEmail(formInfo[3])
+                .setMessage(formInfo[4])
+                .clickSubmit();
+
+        String confirmationMsg = formFields.getConfirmationMessage();
+        assertTrue(confirmationMsg.contains("Your message has been sent"), "Form not submitted successfully");
+
+        formFields.goBack();
+        formFields.goBack();
+        textNavigateToFormFields();
+
+        formFields.setInputFieldText(formInfo[0])
+                .selectCheckbox(formInfo[1])
+                .selectRadioButton(formInfo[2])
+                .setEmail(formInfo[3])
+                .setMessage(formInfo[4])
+                .clickSubmit();
+
+        confirmationMsg = formFields.getConfirmationMessage();
         assertTrue(confirmationMsg.contains("Your message has been sent"), "Form not submitted successfully");
     }
 }
